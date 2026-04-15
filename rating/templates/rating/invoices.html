@@ -1,0 +1,32 @@
+{% extends "rating/base.html" %}
+
+{% block content %}
+
+<h2>Generated Invoices</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th><th>Customer</th><th>Period</th><th>Before
+                Tax</th><th>Tax</th><th>Total</th><th>Created</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for inv in invoices %}
+        <tr>
+            <td>{{ inv.id }}</td>
+            <td>{{ inv.customer.external_id }}</td>
+            <td>{{ inv.period_start }} - {{ inv.period_end }}</td>
+            <td>{{ inv.total_before_tax }}</td>
+            <td>{{ inv.tax_amount }}</td>
+            <td>{{ inv.total }}</td>
+            <td>{{ inv.created_at }}</td>
+        </tr>
+        {% empty %}
+            <tr><td colspan="7">No invoices yet</td></tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% endblock %}
